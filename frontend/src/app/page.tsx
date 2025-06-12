@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import { FormEvent, useActionState } from "react";
+import { useActionState } from "react";
 import { login } from "./actions/auth";
 
 export default function Home() {

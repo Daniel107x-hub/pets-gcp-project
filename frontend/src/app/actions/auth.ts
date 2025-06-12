@@ -1,5 +1,5 @@
 import { FormState, LoginFormSchema } from "@/app/lib/definitions";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export async function login(state: FormState, formData: FormData){
     const validateFields = LoginFormSchema.safeParse({
@@ -13,9 +13,16 @@ export async function login(state: FormState, formData: FormData){
     }
     // Execute api call
     const { email, password } = validateFields.data;
-    const response = await axios.post('/login', {
-        email,
-        password
-    });
-    console.log(response);
+    try{
+        const response = await axios.post('/api/login', {
+            email,
+            password
+        });
+    }catch(e: any){
+        return {
+            message: "Something went wrong"
+        }
+    }
+    console.log("Successfully logged in");
+    // Create user session and redirect user
 }
