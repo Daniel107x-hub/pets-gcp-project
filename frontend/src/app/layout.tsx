@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import DogIcon from '@/app/assests/icons/dog.svg';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,6 +28,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+      <nav className="bg-primary flex flex-row justify-between h-12 items-center px-2">
+        <h1 className="font-extrabold text-2xl">Pets!</h1>
+        <DogIcon className="w-9 aspect-square"/>
+      </nav>
         {children}
       </body>
     </html>
