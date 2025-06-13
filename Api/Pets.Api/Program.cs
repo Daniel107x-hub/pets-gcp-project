@@ -25,9 +25,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseCors(options =>
     {
+        string frontendURL = builder.Configuration.GetValue<string>("FrontendURL") ?? "http://localhost:3000";
+        options.WithOrigins(frontendURL);
         options.AllowAnyHeader();
-        options.AllowAnyOrigin();
         options.AllowAnyMethod();
+        options.AllowCredentials();
     });
 }
 
