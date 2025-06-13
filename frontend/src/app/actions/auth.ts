@@ -1,8 +1,8 @@
-import { FormState, LoginFormSchema } from "@/app/lib/definitions";
+import { LoginFormState, LoginFormSchema, SignupFormState, SignupFormSchema } from "@/app/lib/definitions";
 import axiosInstance from "@/app/config/axiosConfig";
 import { redirect } from "next/navigation";
 
-export async function login(state: FormState, formData: FormData){
+export async function login(state: LoginFormState, formData: FormData){
     const validateFields = LoginFormSchema.safeParse({
         email: formData.get("email"),
         password: formData.get("password")
@@ -17,7 +17,7 @@ export async function login(state: FormState, formData: FormData){
     try{
         const response = await axiosInstance.post('/login', {
             email,
-            password
+             password
         });
     }catch(e: any){
         return {
@@ -27,8 +27,8 @@ export async function login(state: FormState, formData: FormData){
     redirect("/home");
 }
 
-export async function signIn(state: FormState, formData: FormData){
-    const validateFields = LoginFormSchema.safeParse({
+export async function signIn(state: SignupFormState, formData: FormData){
+    const validateFields = SignupFormSchema.safeParse({
         email: formData.get("email"),
         password: formData.get("password")
     });
