@@ -1,6 +1,6 @@
 "use client"
 import React, { useActionState } from 'react'
-import Input from '../_components/input/Input'
+import Input from '../_components/Input/Input'
 import { signIn } from '../actions/auth';
 import Link from 'next/link';
 

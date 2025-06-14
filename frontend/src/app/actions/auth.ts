@@ -1,6 +1,7 @@
 import { LoginFormState, LoginFormSchema, SignupFormState, SignupFormSchema } from "@/app/lib/definitions";
 import axiosInstance from "@/app/config/axiosConfig";
 import { redirect } from "next/navigation";
+import { User } from "../_types/User";
 
 export async function login(state: LoginFormState, formData: FormData){
     const validateFields = LoginFormSchema.safeParse({
@@ -15,9 +16,13 @@ export async function login(state: LoginFormState, formData: FormData){
     // Execute api call
     const { email, password } = validateFields.data;
     try{
-        const response = await axiosInstance.post('/login', {
+        await axiosInstance.post('/login', {
             email,
-             password
+            password
+        }, {
+            params: {
+                useCookies: true
+            }
         });
     }catch(e: any){
         return {
@@ -40,14 +45,33 @@ export async function signIn(state: SignupFormState, formData: FormData){
     // Execute api call
     const { email, password } = validateFields.data;
     try{
-        const response = await axiosInstance.post('/register', {
+        await axiosInstance.post('/register', {
             email,
             password
         });
-    }catch(e: any){
+    }catch(err){
         return {
             message: "Something went wrong"
         }
     }
     redirect("/");
 }
+
+export async function logout(){
+    try{
+        await axiosInstance.post('/logout', {});
+    }catch(err){
+        return {
+            message: "Something went wrong"
+        }
+    }
+    redirect("/");
+}
+
+export async function getCurrentUser(){
+    try{
+        const response = await axiosInstance.get<User>('/me');
+        return response.data;
+    }catch(err){}
+    redirect("/");
+};

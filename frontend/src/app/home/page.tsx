@@ -1,11 +1,18 @@
+"use client"
 import React from 'react'
+import { logout } from '../actions/auth'
+import useAuth from '../_hooks/useAuth'
 
-type Props = {}
-
-const page = (props: Props) => {
+const Home = () => {
+  const {user, loading} = useAuth();
+  console.log(user);
   return (
-    <div>Home</div>
+    <div>
+      <button onClick={() => logout()} className="bg-red-500 text-white px-4 py-2 rounded">
+        Logout
+      </button>
+    </div>
   )
 }
 
-export default page
+export default Home;

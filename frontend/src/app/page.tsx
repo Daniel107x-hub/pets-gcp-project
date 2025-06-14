@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { login } from "./actions/auth";
-import Input from "./_components/input/Input";
+import Input from "./_components/Input/Input";
 
 export default function Home() {
   const [state, action, pending] = useActionState(login, undefined);
